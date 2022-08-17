@@ -1,0 +1,33 @@
+type Query {
+    getCustomers: [Customer]!
+    getCustomerById(customerId: ID!): Customer
+    getAccounts: [Account]!
+    getAccountById(accountId: ID!): Account
+    getTransactions: [Transaction]!
+    getTransactionsById(transactionId: ID!): Transaction
+}
+
+type Customer {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    accounts: [Account]!
+}
+
+type Account {
+    id: ID!
+    type: String!
+    balance: Float!
+    iban: String!
+    customer: Customer!
+    transactions: [Transaction]!
+}
+
+
+type Transaction {
+    id: ID!
+    amount: Float!
+    date: String!
+    account: Account!
+}

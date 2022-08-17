@@ -1,0 +1,39 @@
+services:
+  account-service:
+    build:
+      context: .
+      dockerfile: account-service/Dockerfile
+    ports:
+      - 8082:8082
+    networks:
+      - banking
+  customer-service:
+    build:
+      context: .
+      dockerfile: customer-service/Dockerfile
+    ports:
+      - 8081:8081
+    networks:
+      - banking
+  transaction-service:
+    build:
+      context: .
+      dockerfile: transaction-service/Dockerfile
+    ports:
+      - 8083:8083
+    networks:
+      - banking
+  aggregator-service:
+    build:
+      context: .
+      dockerfile: aggregator-service/Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - banking
+    depends_on:
+      - transaction-service
+      - account-service
+      - customer-service
+networks:
+  banking:
